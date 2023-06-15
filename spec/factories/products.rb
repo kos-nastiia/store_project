@@ -5,4 +5,11 @@ FactoryBot.define do
     price { Faker::Commerce.price(range: 0.01..1000.0) }
     balance { Faker::Number.non_zero_digit }
   end
+
+  trait :invalid do
+    name { nil }
+    description { nil }
+    price { -1 }
+    balance { -1 }
+  end
 end

@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = collection
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = resource
   end
 
   def new
@@ -21,11 +21,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @product = resource
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = resource
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
+    @product = resource
     @product.destroy
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
@@ -42,4 +42,14 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:title, :description, :price, :balance)
   end
+
+  def collection
+    Product.all
+  end
+
+  def resource
+    collection.find(params[:id])
+  end
+
+
 end
