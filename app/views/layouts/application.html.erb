@@ -9,12 +9,13 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="https://kit.fontawesome.com/c34a6ab486.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <% if notice.present? %>
-      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
-    <% end %>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/notice' %>
     <main class="container flex px-5 mx-auto mt-28">
       <%= yield %>
     </main>
