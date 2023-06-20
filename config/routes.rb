@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  get 'products/index'
-  get 'products/show'
-  get 'products/new'
-  get 'products/create'
-  get 'products/edit'
-  get 'products/update'
-  get 'products/destroy'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "products#index"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :orders
   resources :products
+
+  get "cart", to: "cart#show", as: 'cart'
+  post "products/:id/buy", to: "cart#update", as: 'buy'
+  post "products/:id/change", to: "cart#update", as: 'change'
+  post "products/:id/delete", to: "cart#update", as:'delete'
+  delete "clean_cart", to: "cart#delete", as: "clean_cart"
 end
