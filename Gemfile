@@ -28,6 +28,7 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 
 gem "inline_svg"
+gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
 
 gem "pry"
 # Use Redis adapter to run Action Cable in production

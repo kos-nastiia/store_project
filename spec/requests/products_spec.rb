@@ -92,5 +92,4 @@ RSpec.describe "Products", type: :request do
       expect(response).to redirect_to(products_path)
     end
   end
-
 end

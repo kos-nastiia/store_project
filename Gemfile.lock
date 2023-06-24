@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/loqimean/simple_form
+  revision: 0641503244fbf3da4ee3bd091a03d9ac410af465
+  specs:
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,6 +241,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails (>= 6.0.0)
   shoulda-matchers (~> 5.0)
+  simple_form!
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
