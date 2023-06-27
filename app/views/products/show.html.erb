@@ -1,7 +1,26 @@
 <div class="flex w-full mx-auto md:w-2/3">
   <div class="mx-auto">
 
-    <%= render @product %>
+    <div class="text-3xl font-semibold text-center">
+        <%= @product.title %>
+      </div>
+      <div>
+        <%= @product.description %>
+      </div>
+
+      <div>
+        Price: <%= number_to_currency(@product.price, :unit => "₴") %>
+      </div>
+
+      <div>
+        Available: <%= @product.balance %>
+      </div>
+    </div>
+    <div class="relative mb-3">
+      <% if @product.balance.positive? %>
+        <%= render "carts/buy_form", product: @product %>
+      <% end %>
+    </div>
 
     <div class="relative mb-3">
       <%= render "cart/buy_form", product: @product %>

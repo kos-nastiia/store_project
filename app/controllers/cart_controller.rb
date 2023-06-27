@@ -1,9 +1,8 @@
 class CartController < ApplicationController
-  def show
-    return unless session[:products]
+  before_action :init_cart, only: :update
 
-    @session_products = call_session.products
-    @session_sum = call_session.sum
+  def show
+    @cart = Cart::CartService.new(session, cart_params)
   end
 
   def create
@@ -11,41 +10,24 @@ class CartController < ApplicationController
   end
 
   def update
-    create unless session[:products].present?
+    notice = Cart::CartService.new(session, params).call
 
-    modify_product
+    redirect_back fallback_location: root_path, notice: notice
   end
 
   def destroy
-    session.remove_from_cart(:products)
+    session.delete(:products)
 
     redirect_to products_path, notice: "Cart was cleaned"
   end
 
   private
 
-  def modify_product
-    case cart_params[:update_action]
-
-    when 'buy'
-      call_session.add_to_cart
-      redirect_to products_path, notice: "Product added to cart."
-
-    when 'change'
-      call_session.update_product_amount
-      redirect_to cart_path, notice: "Amount was changed"
-
-    when 'delete'
-      call_session.remove_from_cart
-      redirect_to cart_path, notice: "Product was removed" if session[:products].present?
-    end
+  def init_cart
+    create unless session[:products].present?
   end
 
   def cart_params
     params.permit(:id, :amount, :update_action)
-  end  
-
-  def call_session
-    Cart::CartService.new(session, cart_params)
   end
 end

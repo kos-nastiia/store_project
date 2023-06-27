@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    
     if @product.save
       redirect_to @product, notice: 'Product was successfully created.'
     else
@@ -26,6 +27,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = resource
+
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -35,7 +37,9 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = resource
+
     @product.destroy
+
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
