@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show] do
     member do
-      post :buy, to: "carts#update", as: "buy"
-      post :change_amount, to: "carts#update", as: "change_amount"
-      post :cancel_delivery, to: "carts#update", as: "cancel_delivery"
+      post :buy, to: "cart#update", as: "buy"
+      post :change_amount, to: "cart#update", as: "change_amount"
+      post :cancel_delivery, to: "cart#update", as: "cancel_delivery"
     end
   end
 

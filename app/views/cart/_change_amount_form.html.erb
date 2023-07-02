@@ -1,5 +1,5 @@
 <%= form_with url: change_amount_product_path(product), method: :post do |f| %>
   <%= f.hidden_field :update_action, value: 'change' %>
-  <%= f.number_field :amount, value:session.dig(:products, product.id.to_s) %>
+  <%= f.number_field :amount, :value => session.dig(:products, product.id.to_s) %>
   <%= f.submit "Change amount", class:"trounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
 <% end %>
