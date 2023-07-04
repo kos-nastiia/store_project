@@ -48,10 +48,11 @@ class ProductsController < ApplicationController
   end
 
   def collection
-    Product.all
+    Product.all.ordered
   end
 
   def resource
+    return Product.new if params[:id] == "new"
     collection.find(params[:id])
   end
 
