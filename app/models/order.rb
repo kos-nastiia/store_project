@@ -13,7 +13,7 @@ class Order < ApplicationRecord
       JOIN products ON products.id = product_orders.product_id
       WHERE product_orders.order_id = #{id}
       AND product_orders.product_id = #{product.id};"
-    )
+    )[0]['product_sum']
   end
 
   def product_amount(product)
@@ -26,7 +26,6 @@ class Order < ApplicationRecord
       FROM product_orders
       JOIN products ON products.id = product_orders.product_id
       WHERE product_orders.order_id = #{id};"
-    )
+    )[0]['product_sum']
   end
-end
 end

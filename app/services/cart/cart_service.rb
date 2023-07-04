@@ -1,9 +1,9 @@
 class Cart::CartService
-  attr_reader :current_session, :params, :product, :product_balance
+  attr_reader :session, :params, :product, :product_balance
   attr_accessor :notice
 
-  def initialize(current_session, params = {})
-    @current_session = current_session
+  def initialize(session, params = {})
+    @session = session
     @params = params
   end
 
@@ -25,34 +25,37 @@ class Cart::CartService
   end
 
   def items
-    Product.find(current_session[:products].keys)
+    Product.find(session[:products].keys)
   end
 
   def sum
-    items.map { |product| current_session[:products][product.id.to_s] * product.price }.sum
+    items.map { |product| session[:products][product.id.to_s] * product.price }.sum
   end
 
+  def product_sum(product)
+    session.dig(:products, product.id.to_s) * product.price
+  end
   private
 
   def add_product
     set_product
 
-    if current_session[:products].key?(product[:id])
-      amount = amount_greater_balance? ? product_balance: product[:amount]
-      current_session[:products][product[:id]] += amount
+    if session[:products].key?(product[:id])
+      amount = amount_greater_balance? ? product_balance: session[:products][product[:id]] + product[:amount]
+      session[:products][product[:id]] = amount
     else
-      @current_session[:products].merge!(product[:id] => product[:amount])
+      @session[:products] = @session[:products].merge(product[:id] => product[:amount])
     end
   end
 
   def change_amount
     set_product
 
-    current_session[:products][product[:id]] = product[:amount]
+    session[:products][product[:id]] = product[:amount]
   end
 
   def delete_product
-    current_session[:products].delete(params[:id])
+    session[:products].delete(params[:id])
   end
 
   def set_product
@@ -61,8 +64,12 @@ class Cart::CartService
       amount: params[:amount].to_i
     }
 
-    @product_balance = Product.find(product[:id].to_i).balance
+    @product_balance = Product.find(product[:id]).balance
 
     product[:amount] = product_balance if product_balance < product[:amount]
+  end
+
+  def amount_greater_balance?
+    product_balance < (product[:amount] + session[:products][product[:id]])
   end
 end

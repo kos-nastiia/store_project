@@ -1,19 +1,19 @@
 <div class="flex w-full mx-auto">
   <div class="mx-auto">
     <div class="flex flex-col overflow-x-auto text-base text-neutral-600 dark:text-neutral-900 sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 overflow-hidden sm:px-6 lg:px-8">
-        <div class="block p-6 bg-white border-2 rounded-lg dark:bg-neutral-300">
+      <div class="inline-block min-w-full py-2 overflow-hidden sm:px-6 lg:px-8 ">
+        <div class="block p-6 bg-white border-2 rounded-lg ">
           <ul class="ms-6 w-96">
             <h1 class="my-5 text-3xl font-bold">Order №<%= @order.id %></h1>
-            <li class="mb-4"><%= @order.first_name %></li>
-            <li class="mb-4"><%= @order.last_name %></li>
-            <li class="mb-4"><%= @order.address %></li>
-            <li class="mb-4"><%= @order.phone %></li>
+            <li class="mb-3"><%= @order.first_name %></li><hr>
+            <li class="mb-3"><%= @order.last_name %></li><hr>
+            <li class="mb-3"><%= @order.address %></li><hr>
+            <li class="mb-3"><%= @order.phone %></li><hr>
           </ul>
           <table class="min-w-full p-3 my-6 text-sm font-light text-left border-2">
             <thead class="font-medium border-b dark:border-neutral-500">
               <tr>
-                <th scope="col" class="table-item">Name</th>
+                <th scope="col" class="table-item">Title</th>
                 <th scope="col" class="table-item">Price</th>
                 <th scope="col" class="table-item">Amount</th>
                 <th scope="col" class="table-item">Sum</th>
@@ -43,13 +43,13 @@
     </div>
 
     <div class="inline-block ml-2">
-      <%= link_to 'Edit this order', edit_order_path(@order), class: "btn-gray" %>
+      <%= link_to 'Edit this order', edit_order_path(@order), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </div>
     <div class="inline-block ml-2">
-      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "btn-gray" %>
+      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </div>
     <div class="inline-block ml-2">
-      <%= link_to 'Back to products', products_path, class: "btn-gray" %>
+      <%= link_to 'Back to products', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     </div>
   </div>
 </div>
