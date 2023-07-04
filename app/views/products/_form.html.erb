@@ -1,25 +1,8 @@
-<%= form_with(model: product, class: "contents") do |f| %>
-  <div class="my-5">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+<%= simple_form_for product, url: products_path, method: :post  do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :balance %>
 
-  <div class="my-5">
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :price %>
-    <%= f.text_field :price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :balance %>
-    <%= f.text_field :balance, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+  <%= f.button :submit, "Create product", class: 'btn-submit' %>
 <% end %>

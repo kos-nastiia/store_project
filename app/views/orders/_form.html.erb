@@ -1,25 +1,8 @@
-<%= form_with(model: order, class: "contents") do |f| %>
-  <div class="my-5">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+<%= simple_form_for order, url: orders_path, method: :post  do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :address %>
+  <%= f.input :phone %>
 
-  <div class="my-5">
-    <%= f.label :last_name %>
-    <%= form.text_field :last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :address %>
-    <%= form.text_field :address, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :phone %>
-    <%= f.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+  <%= f.button :submit, "Create order", class: 'btn-submit' %>
 <% end %>
