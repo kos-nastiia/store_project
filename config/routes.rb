@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   root "products#index"
 
-  resources :products, only: [:index, :show, :new, :edit, :destroy, :update] do
+  resources :products do
     member do
-      post :buy, to: "cart#update", as: "buy"
-      post :change_amount, to: "cart#update", as: "change_amount"
-      post :cancel_delivery, to: "cart#update", as: "cancel_delivery"
+      resource :cart, only: [:update] do
+        [:add, :remove, :change_amount].each do |action|
+          patch action, to: "cart#update", as: "#{action}_product_in", defaults: { update_action: action.to_s }
+        end
+      end
     end
   end
 
-  get "cart", to: "cart#show", as: 'cart'
-  delete "clean_cart", to: "cart#destroy", as: "clean_cart"
-
+  resources :cart
   resources :orders
-  resources :products
 end

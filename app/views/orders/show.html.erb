@@ -43,13 +43,13 @@
     </div>
 
     <div class="inline-block ml-2">
-      <%= link_to 'Edit this order', edit_order_path(@order), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to 'Edit this order', edit_order_path(@order), class: "btn-grey" %>
     </div>
     <div class="inline-block ml-2">
-      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= button_to 'Destroy this order', order_path(@order), method: :delete, class: "btn-grey" %>
     </div>
     <div class="inline-block ml-2">
-      <%= link_to 'Back to products', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to 'Back to products', products_path, class: "btn-grey" %>
     </div>
   </div>
 </div>

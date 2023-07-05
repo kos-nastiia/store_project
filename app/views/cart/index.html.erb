@@ -2,7 +2,7 @@
   <div class="overflow-x-auto">
     <div class="inline-block min-w-full py-2 ">
       <div class="overflow-hidden">
-        <% if session[:products] %>
+        <% if session[:products].present? %>
           <table class="min-w-full mx-4 text-sm font-light text-left ">
             <thead class="font-medium border-b dark:border-neutral-500">
               <tr>
@@ -21,7 +21,7 @@
                   <td class="px-6 py-4 whitespace-nowrap"><%= render "cart/change_amount_form", product: product %></td>
                   <td class="px-6 py-4 whitespace-nowrap"><%= number_to_currency(@cart.product_sum(product), unit: "₴") %></td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <%= button_to cancel_delivery_product_path(product, update_action: 'delete') do %>
+                    <%= button_to remove_product_in_cart_path(product), method: :patch do %>
                         <i class="fa fa-regular fa-trash fa-2x"></i>
                     <% end %>
                   </td>
@@ -38,11 +38,11 @@
 
           <div class="flex items-center justify-between">
             <div class="inline-block m-5">
-                <%= link_to 'Pay this order', new_order_path, class: " text-white font-bold rounded-lg px-5 py-2.5 ml-4 bg-blue-600 hover:bg-blue-400 text-base" %>
+                <%= link_to 'Pay this order', new_order_path, class: "btn-pay" %>
             </div>
             
             <div class="inline-block m-5">
-              <%= button_to 'Delete all products', clean_cart_path, method: :delete, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
+              <%= button_to 'Delete all products', cart_path(@cart), method: :delete, class: "text-white bg-gray-500 font-medium rounded-lg px-5 py-2.5 text-sm" %>
             </div>
           </div>
         <% else %>

@@ -7,13 +7,7 @@ class Order < ApplicationRecord
   validates :first_name, :last_name, :address, :phone, presence: true
 
   def product_sum(product)
-    ActiveRecord::Base.connection.execute(
-      "SELECT product_orders.amount * products.price AS product_sum
-      FROM product_orders
-      JOIN products ON products.id = product_orders.product_id
-      WHERE product_orders.order_id = #{id}
-      AND product_orders.product_id = #{product.id};"
-    )[0]['product_sum']
+    ProductOrder.joins(:product).where(order_id: id, product_id: product.id).sum('product_orders.amount * products.price')
   end
 
   def product_amount(product)
@@ -21,11 +15,6 @@ class Order < ApplicationRecord
   end
 
   def total_sum
-    ActiveRecord::Base.connection.execute(
-      "SELECT SUM(product_orders.amount * products.price) AS total_sum
-      FROM product_orders
-      JOIN products ON products.id = product_orders.product_id
-      WHERE product_orders.order_id = #{id};"
-    )[0]['product_sum']
+    ProductOrder.joins(:product).where(order_id: id).sum('product_orders.amount * products.price')
   end
 end

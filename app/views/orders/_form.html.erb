@@ -1,8 +1,8 @@
-<%= simple_form_for order, url: orders_path, method: :post  do |f| %>
+<%= simple_form_for order, url: orders_path, method: :post do |f| %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :address %>
   <%= f.input :phone %>
 
-  <%= f.button :submit, "Create order", class: 'inline-block px-5 py-3 font-medium text-white bg-blue-600 rounded-lg cursor-pointer' %>
+  <%= f.button :submit, "Create order", class: 'btn-blue' %>
 <% end %>
