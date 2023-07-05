@@ -1,11 +1,35 @@
-<div class="flex w-full mx-auto md:w-2/3">
-  <div class="mx-auto">
+<div class="mx-auto">
+  <div class="w-full p-1 m-5 md:p-2">
+    <div class="grid grid-cols-1 gap-4">
+      <div class="text-3xl font-semibold text-center">
+        <%= @product.title %>
+      </div>
 
-    <%= render @product %>
-    
-    <%= render "cart/buy_form", product: @product %>  
+      <div>
+        <%= @product.description %>
+      </div>
 
-    <%= link_to 'Edit this product', edit_product_path(@product), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Back to products', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <div>
+        Price: <%= number_to_currency(@product.price, unit: "₴ ") %>
+      </div>
+
+      <div>
+        Available: <%= @product.balance %>
+      </div>
+    </div>
+
+    <div class="relative mb-3">
+      <% if @product.balance.nonzero? %>
+        <%= render "cart/buy_form", product: @product %>
+      <% end %>
+    </div>
+
+    <div class="inline-block">
+       <%= link_to 'Edit this product', edit_product_path(@product), class: "btn-grey" %>
+      <div class="inline-block ml-2">
+        <%= button_to 'Destroy this product', product_path(@product), method: :delete, class: "btn-grey" %>
+      </div>
+      <%= link_to 'Back to products', products_path, class: "btn-grey" %>
+    </div>
   </div>
 </div>

@@ -19,7 +19,9 @@
     <%= product.balance %>
   </p>
 
-  <%= link_to "Show this product", product, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Show this product", product, class: "btn-grey" %>
+  <%= link_to 'Edit this product', edit_product_path(product), class: "btn-grey" %>
+  <div class="my-5">
     <%= render "cart/buy_form", product: product %>
   </div>
   <hr class="mt-6">

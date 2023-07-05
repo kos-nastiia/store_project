@@ -1,27 +1,20 @@
 class Orders::Manager
-  def initialize(products_hash, order, current_session)
-    @products_hash = products_hash
+
+  def initialize(cart, order, current_session)
+    @cart = cart
     @order = order
     @current_session = current_session
   end
 
   def call
-    @products_hash.each do |product_id, amount|
-      product = Product.find(product_id)
-
-      @order.product_orders.create(product_id:, amount:)
+    product_orders = @cart.map do |product_id, amount|
+      { product_id: product_id.to_i, amount: amount, order_id: @order.id }
     end
 
+    ProductOrder.insert_all(product_orders)
+
     @order.products.each do |product|
-      ActiveRecord::Base.connection.execute(
-        "UPDATE products SET balance = balance - (
-          SELECT amount
-          FROM product_orders
-          WHERE product_orders.order_id = #{@order.id}
-          AND product_orders.product_id = #{product.id}
-        )
-        WHERE id = #{product.id};"
-      )
+      product.update(balance: product.balance - product.product_orders.where(order_id: @order.id).sum(:amount))
     end
 
     @current_session.delete(:products)

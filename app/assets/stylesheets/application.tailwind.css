@@ -16,11 +16,15 @@
     @apply !text-red-500 no-underline;
   }
 
-  .btn-back{
-    @apply rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium
+  .btn-pay{
+    @apply text-white font-bold rounded-lg px-5 py-2.5 ml-4 bg-blue-600 hover:bg-blue-400 text-base;
+  }
+
+  .btn-grey{
+    @apply inline-block px-5 py-3 ml-2 font-medium bg-gray-100 rounded-lg;
   }
 
   .btn-blue{
-    @apply rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium
+    @apply inline-block px-5 py-3 font-medium text-white bg-blue-600 rounded-lg cursor-pointer hover:bg-blue-400;
   }
 }

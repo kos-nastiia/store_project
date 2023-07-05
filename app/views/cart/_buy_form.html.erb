@@ -1,7 +1,4 @@
-<div class="relative mb-3">
-  <%= form_with url: buy_product_path(product), method: :post do |f| %>
-    <%= f.hidden_field :update_action, value: 'buy' %>
-    <%= f.number_field :amount, :min => 1, :value => session.dig(:products, product.id.to_s) || 0, class:'input-field w-24 h-9 inline-block' %>
-    <%= f.submit "Add to cart", class:"rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  <% end %>
-</div>
+<%= form_with url: add_product_in_cart_path(product), method: :patch do |f| %>
+  <%= f.number_field :amount, min: 1, value: session.dig(:products, product.id.to_s) || 0, class:'rounded-lg input-field w-24 h-9 inline-block' %>
+  <%= f.submit "Add to cart", class: "btn-blue" %>
+<% end %>
