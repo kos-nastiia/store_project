@@ -4,7 +4,7 @@ RSpec.describe "Products", type: :request do
   let!(:product) { create(:product) }
 
   let(:valid_attributes) { { product: attributes_for(:product) } }
-  let(:invalid_attributes) { { product: attributes_for(:product, :invalid) } }
+  let(:invalid_attributes) { { product: attributes_for(:product, :invalid_product) } }
 
   describe "GET /index" do
     it "returns products" do

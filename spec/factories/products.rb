@@ -6,10 +6,9 @@ FactoryBot.define do
     balance { Faker::Number.non_zero_digit }
   end
 
-  trait :invalid do
-    name { nil }
+  trait :invalid_product do
+    title { nil }
     description { nil }
-    price { -1 }
-    balance { -1 }
+    balance { nil }
   end
 end
