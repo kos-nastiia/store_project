@@ -9,10 +9,6 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def edit
-    @order = resourse
-  end
-
   def create
     @order = Order.new(order_params)
 
@@ -22,16 +18,6 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order), notice: "Order was successfully created."
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    @order = resourse
-
-    if @order.update(order_params)
-      redirect_to @order, notice: "Order was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 

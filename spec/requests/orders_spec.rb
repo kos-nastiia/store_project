@@ -49,28 +49,6 @@ RSpec.describe "Orders", type: :request do
     end
   end
 
-
-  describe 'PATCH #update' do
-    context 'with valid params' do
-      it 'updates the order and redirects to the order page' do
-        patch order_path(order), params: valid_attributes
-
-        expect(order.reload.first_name).to eq(valid_attributes[:order][:first_name])
-        expect(response).to redirect_to(order)
-        expect(flash[:notice]).to eq("Order was successfully updated.")
-      end
-    end
-
-    context 'with invalid params' do
-      it 'sets the status code to unprocessable_entity' do
-        patch order_path(order), params: invalid_attributes
-
-        expect(response).to be_unprocessable
-        expect(response).to render_template(:edit)
-      end
-    end
-  end
-
   describe 'DELETE #destroy' do
     it 'destroys the order and redirects to the products list' do
       expect { delete order_path(order) }.to change(Order, :count).by(-1)
