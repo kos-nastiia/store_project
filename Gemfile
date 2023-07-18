@@ -27,6 +27,10 @@ gem "stimulus-rails"
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 gem "tailwindcss-rails"
 
+gem "inline_svg"
+gem 'simple_form', git: 'https://github.com/loqimean/simple_form'
+
+gem "pry"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -55,6 +59,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails", ">= 6.0.0"
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -67,4 +72,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
