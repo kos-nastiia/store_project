@@ -5,14 +5,14 @@ RSpec.describe "Carts", type: :request do
 
   describe "GET /cart" do
     it "renders the empty cart page" do
-      get cart_index_path
+      get carts_path
 
       expect(response).to be_successful
     end
 
     it "renders the cart page with product" do
       patch add_product_in_cart_path(product)
-      get cart_index_path
+      get carts_path
 
       expect(response).to be_successful
       expect(response.body).to include(product.title)

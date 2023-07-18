@@ -1,4 +1,4 @@
-class CartController < ApplicationController
+class CartsController < ApplicationController
   before_action :init_cart, only: :update
 
   def index
