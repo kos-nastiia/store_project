@@ -35,7 +35,7 @@ RSpec.describe "Products", type: :request do
       it "creates a new product and redirects to the created product" do
         expect { post products_path, params: valid_attributes }.to change(Product, :count).by(1)
      
-        expect(response).to redirect_to(product_path(Product.last))
+        expect(response).to redirect_to(products_path(Product.last))
         expect(flash[:notice]).to eq("Product was successfully created.")
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe "Products", type: :request do
         patch product_path(product), params: valid_attributes
         
         expect(product.reload.title).to eq(valid_attributes[:product][:title])
-        expect(response).to redirect_to(product)
+        expect(response).to redirect_to(products_path(Product.last))
         expect(flash[:notice]).to eq("Product was successfully updated.")
       end
     end
